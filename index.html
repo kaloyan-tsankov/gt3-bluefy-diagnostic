@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="bg">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>GT 3 · BLE диагностика</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;background:#101820;color:#eef4fa}body{max-width:720px;margin:auto;padding:28px 18px}h1{font-size:1.8rem}p,li{line-height:1.6}section{background:#1c2935;border:1px solid #405263;border-radius:14px;padding:20px;margin:18px 0}button{font:inherit;padding:14px 18px;border-radius:9px;border:0;background:#82d9d0;color:#102026;cursor:pointer;margin:5px 5px 5px 0}button:disabled{opacity:.45;cursor:default}button:focus-visible{outline:3px solid white;outline-offset:3px}pre,dd,code{overflow-wrap:anywhere;white-space:pre-wrap}dd{margin:6px 0 18px}pre{font-size:.9rem;line-height:1.6}small{font-size:.9rem;color:#bccbd8}.warning{border-left:4px solid #f7c76d;padding-left:14px}
+</style>
+<h1>GT 3 · BLE диагностика</h1>
+<p>Локална диагностика в Bluefy на iPhone. Изборът на устройство и GATT свързването са отделни действия.</p>
+<p class="warning">Няма запис, четене на стойности, известия, HiChain или команди към часовника. GATT откриването все пак обменя служебни BLE заявки. Ако iOS/Bluefy поиска сдвояване, натисни „Отказ“.</p>
+<section>
+<h2>Устройство</h2>
+<p id="environment" role="status"></p>
+<button id="choose" disabled>Избери устройство</button>
+<button id="connect" disabled>Свържи GATT и открий</button>
+<button id="disconnect" disabled>Прекъсни GATT</button>
+<dl><dt>Име</dt><dd id="name">—</dd><dt>ID от браузъра</dt><dd id="deviceId">—</dd></dl>
+<p id="status" role="status" aria-live="polite">Няма избрано устройство.</p>
+</section>
+<section><h2>FE86 и характеристики</h2><pre id="result">Няма извършено откриване.</pre></section>
+<section><h2>Как да тълкуваш резултата</h2>
+<ul><li>Списъкът включва всички достъпни BLE устройства. Име или ID не доказват, че това е GT 3. ID не е непременно MAC адрес.</li><li>optionalServices дава разрешение за FE86; не гарантира, че услугата съществува или се рекламира.</li><li>Успех означава само достъп до FE86 и видимите характеристики. FE01/FE02 не доказват възможност за качване на снимки.</li><li>Липса или грешка може да идва от разрешения, Bluefy, фърмуер, недостъпно устройство или заета връзка. Не доказва липса на протокола.</li><li>Няма автоматично повторно свързване. Не премахвай сдвояването с Huawei Health за този тест; едновременната работа не е гарантирана.</li></ul>
+<small>Без външни библиотеки, анализи, съхраняване или изпращане на диагностични данни от страницата. Хостингът получава обичайната заявка за зареждане. Резултатът се губи при презареждане.</small></section>
+<script src="app.js"></script>
+</html>
