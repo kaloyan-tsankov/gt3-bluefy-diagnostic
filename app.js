@@ -8,6 +8,7 @@ let busy = false;
 const supported = window.isSecureContext && typeof navigator.bluetooth?.requestDevice === 'function';
 function controls() {
   el('choose').disabled = !supported || busy || !!device?.gatt?.connected;
+  el('chooseFe86').disabled = el('choose').disabled;
   el('connect').disabled = busy || !device?.gatt || !!device.gatt.connected;
   el('disconnect').disabled = !device?.gatt?.connected;
 }
@@ -28,13 +29,16 @@ function errorText(error) {
 el('environment').textContent = supported
   ? 'Защитен контекст · Web Bluetooth API е наличен.'
   : 'Необходим е HTTPS адрес и браузър с Web Bluetooth (например Bluefy).';
-el('choose').addEventListener('click', async () => {
+async function chooseDevice(fe86Only) {
   if (busy) return;
   busy = true;
   controls();
   try {
     // Called directly from the button gesture. No connection here.
-    const selected = await navigator.bluetooth.requestDevice({
+    const selected = await navigator.bluetooth.requestDevice(fe86Only ? {
+      filters: [{ services: [SERVICE] }],
+      optionalServices: [SERVICE]
+    } : {
       acceptAllDevices: true,
       optionalServices: ['0000fe86-0000-1000-8000-00805f9b34fb']
     });
@@ -47,9 +51,13 @@ el('choose').addEventListener('click', async () => {
     el('status').textContent = device.gatt
       ? 'Устройството е избрано. GATT не е свързан от страницата.'
       : 'Устройството е избрано, но браузърът не предоставя GATT.';
-  } catch (error) { el('status').textContent = errorText(error); }
+  } catch (error) {
+    el('status').textContent = errorText(error) + (fe86Only ? '\nFE86 търсенето показва само устройства, които рекламират услугата. Празен списък не доказва липса на FE86. Предишният избор, ако има такъв, остава активен.' : '');
+  }
   finally { busy = false; controls(); }
-});
+}
+el('choose').addEventListener('click', () => chooseDevice(false));
+el('chooseFe86').addEventListener('click', () => chooseDevice(true));
 el('connect').addEventListener('click', async () => {
   if (busy || !device?.gatt || device.gatt.connected) return;
   busy = true;
@@ -89,3 +97,5 @@ window.addEventListener('pagehide', () => {
   if (device?.gatt?.connected) device.gatt.disconnect();
 });
 controls();
+
+

@@ -15,9 +15,12 @@
 
 Достъпът до услугата не доказва поддръжка на качване на снимки. optionalServices е разрешение, не филтър или гаранция за налична услуга. Името/ID не удостоверяват модел или собственик. Съвместната работа с Huawei Health зависи от часовника и iOS. Тази версия не е проверена с физически iPhone/GT 3.
 
-## GitHub Pages от private хранилище
-Хранилището е private по желание на собственика. GitHub Pages от private хранилище изисква подходящ GitHub план. Private хранилище не гарантира частен Pages сайт: публикуваните HTML/JS обикновено са достъпни за посетителите. Не качвай лични данни или резултати с идентификатори.
+## GitHub Pages
+Хранилището и страницата са публични. Адрес: https://kaloyan-tsankov.github.io/gt3-bluefy-diagnostic/ . Не качвай лични данни или резултати с идентификатори.
 
+„Търси само FE86“ използва филтър по рекламирана услуга FE86. Ако часовникът не я рекламира, няма да се появи. Резултатът не удостоверява модела или собственика. Изборът не свързва GATT; за това има отделен бутон.
+
+Настройки:
 1. Качи index.html, app.js и .nojekyll в корена на main (съдържанието на папката, не ZIP файла).
 2. Settings → Pages → Build and deployment → Source: Deploy from a branch.
 3. Branch: main; folder: / (root); Save.
@@ -31,4 +34,5 @@
 - Bluefy: https://apps.apple.com/us/app/bluefy-web-ble-browser/id1492822055
 - GitHub Pages: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
 - HTTPS: https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https
+
 
